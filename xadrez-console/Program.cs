@@ -7,6 +7,10 @@ namespace xadrez_console
     {
         static void Main(string[] args)
         {
+            PosicaoXadrez posicao = new PosicaoXadrez('a', 1);
+            Console.WriteLine(posicao);
+
+            Console.WriteLine(posicao.TransformaRealPosicao());
             try
             {
                 Tabuleiro tab = new Tabuleiro(8, 8);
