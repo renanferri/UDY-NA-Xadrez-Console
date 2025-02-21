@@ -60,7 +60,7 @@
             }
         }
 
-        private bool PosicaoValida(Posicao pos)
+        public bool PosicaoValida(Posicao pos)
         {
             if(pos.Linha < 0 || pos.Linha>=Linhas || pos.Coluna < 0 || pos.Coluna >= Colunas)
             {
