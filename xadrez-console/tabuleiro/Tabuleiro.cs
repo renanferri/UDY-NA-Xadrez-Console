@@ -5,23 +5,23 @@
         public int Linhas { get; set; }
         public int Colunas { get; set; }
         
-        private Peca[,] Pecas;
+        private Peca[,] _pecas;
 
         public Tabuleiro(int linhas, int colunas)
         {
             Linhas = linhas;
             Colunas = colunas;  
-            Pecas = new Peca[linhas, colunas];
+            _pecas = new Peca[linhas, colunas];
         }
 
         public Peca Peca(int linha, int coluba)
         {
-            return Pecas[linha, coluba];
+            return _pecas[linha, coluba];
         }
 
         public Peca Peca(Posicao pos)
         {
-            return Pecas[pos.Linha, pos.Coluna];
+            return _pecas[pos.Linha, pos.Coluna];
         }
 
         public void ColocarPeca(Peca p, Posicao pos)
@@ -30,7 +30,7 @@
             {
                 throw new TabuleiroException("Já existe uma peça nessa posição!");
             }
-            Pecas[pos.Linha, pos.Coluna] = p;
+            _pecas[pos.Linha, pos.Coluna] = p;
             p.Posicao = pos;
         }
 
@@ -42,7 +42,7 @@
             }
             Peca aux = Peca(pos);
             aux.Posicao = null;
-            Pecas[pos.Linha, pos.Coluna] = null;
+            _pecas[pos.Linha, pos.Coluna] = null;
             return aux;
         }
 
