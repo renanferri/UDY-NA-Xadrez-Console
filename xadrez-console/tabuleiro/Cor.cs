@@ -9,10 +9,10 @@ namespace tabuleiro
     enum Cor
     {
         Branca,
-        Preto,
+        Preta,
         Amarela,
         Azul,
-        Vermelho,
+        Vermelha,
         Verde,
         Laranja
     }

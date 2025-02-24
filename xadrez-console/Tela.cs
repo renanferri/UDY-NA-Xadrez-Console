@@ -115,7 +115,7 @@ namespace xadrez_console
             Console.Write("Pretas: ");
             ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
-            ImprimirConjunto(partida.PecasCapturadas(Cor.Preto));
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
             Console.ForegroundColor = aux;
             
             Console.WriteLine();
