@@ -9,11 +9,11 @@ namespace xadrez
         public Cor JogadorAtual { get; private set; }
         public bool Terminada { get; private set; }
         public bool Xeque { get; private set; }
-        
+
         private HashSet<Peca> _pecas;
 
         private HashSet<Peca> _capturadas;
-        
+
 
         public PartidaDeXadrez()
         {
@@ -25,8 +25,8 @@ namespace xadrez
             _pecas = new HashSet<Peca>();
             _capturadas = new HashSet<Peca>();
             ColocarPecas();
-        } 
-        
+        }
+
         public void ValidarPosicaoDeOrigem(Posicao pos)
         {
             if (Tab.Peca(pos) == null)
@@ -47,7 +47,7 @@ namespace xadrez
 
         public void ValidarPosicaoDeDestino(Posicao origem, Posicao destino)
         {
-            if(!Tab.Peca(origem).PodeMoverPara(destino))
+            if (!Tab.Peca(origem).PodeMoverPara(destino))
             {
                 throw new TabuleiroException("Posição de destino inválida!");
             }
@@ -69,9 +69,16 @@ namespace xadrez
                 Xeque = true;
             }
 
-            Turno++;
-            MudaJogador();
-        }        
+            if (EstaEmXequeMate(Adversario(JogadorAtual)))
+            {
+                Terminada = true;
+            }
+            else
+            {
+                Turno++;
+                MudaJogador();
+            }                
+        }
 
         private Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
@@ -134,6 +141,40 @@ namespace xadrez
             }
 
             return false;
+        }
+
+        private bool EstaEmXequeMate(Cor cor)
+        {
+            if (!EstaEmXeque(cor))
+            {
+                return false;
+            }
+
+            foreach (Peca p in PecasEmJogo(cor))
+            {
+                bool[,] mat = p.MovimentosPossiveis();
+                for (int i = 0; i < Tab.Linhas; i++)
+                {
+                    for (int j = 0; j < Tab.Colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = p.Posicao;
+                            Posicao destino = new Posicao(i, j);
+                            
+                            Peca pecaCapturada = ExecutaMovimento(origem, destino);
+                            bool xeque = EstaEmXeque(cor);
+                            DesfazMovimento(origem, destino, pecaCapturada);
+
+                            if (!xeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         private HashSet<Peca> PecasEmJogo(Cor cor)
