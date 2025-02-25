@@ -34,7 +34,7 @@ namespace xadrez
             switch (Cor)
             {
                 case Cor.Branca:
-                    
+
                     pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
                     if (Tab.PosicaoValida(pos) && Livre(pos))
                     {

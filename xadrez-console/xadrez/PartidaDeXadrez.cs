@@ -63,11 +63,14 @@ namespace xadrez
                 DesfazMovimento(origem, destino, pecaCapturda);
                 throw new TabuleiroException("Você não pode se colocar em xeque!");
             }
-
-            Xeque = false;
+            
             if (EstaEmXeque(Adversario(JogadorAtual)))
             {
                 Xeque = true;
+            }
+            else
+            {
+                Xeque = false;
             }
 
             if (EstaEmXequeMate(Adversario(JogadorAtual)))
@@ -93,6 +96,26 @@ namespace xadrez
                 _capturadas.Add(pecaCapturada);
             }
 
+            //#jogadaespecial roque pequeno
+            if (p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca T = Tab.RetirarPeca(origemT);
+                T.IncrementarQteMovimentos();
+                Tab.ColocarPeca(T, destinoT);
+            }
+
+            //#jogadaespecial roque grande
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca T = Tab.RetirarPeca(origemT);
+                T.IncrementarQteMovimentos();
+                Tab.ColocarPeca(T, destinoT);
+            }
+
             return pecaCapturada;
         }
 
@@ -108,6 +131,27 @@ namespace xadrez
             }
 
             Tab.ColocarPeca(p, origem);
+
+
+            //#jogadaespecial roque pequeno
+            if (p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca T = Tab.RetirarPeca(destinoT);
+                T.DecrementarQteMovimentos();
+                Tab.ColocarPeca(T, origemT);
+            }
+
+            //#jogadaespecial roque grande
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoT = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca T = Tab.RetirarPeca(destinoT);
+                T.DecrementarQteMovimentos();
+                Tab.ColocarPeca(T, origemT);
+            }
         }
 
         public HashSet<Peca> PecasCapturadas(Cor cor)
