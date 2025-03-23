@@ -1,7 +1,8 @@
-﻿using tabuleiro;
-using xadrez;
+﻿using xadrez_console.Application.Services;
+using xadrez_console.Domain.Entities;
+using xadrez_console.Exceptions;
 
-namespace xadrez_console
+namespace xadrez_console.Presentation.ConsoleUI
 {
     class Program
     {
@@ -9,7 +10,7 @@ namespace xadrez_console
         {
             try
             {
-                PartidaDeXadrez partida = new PartidaDeXadrez();
+                PartidaDeXadrezService partida = new PartidaDeXadrezService();
 
                 while (!partida.Terminada)
                 {

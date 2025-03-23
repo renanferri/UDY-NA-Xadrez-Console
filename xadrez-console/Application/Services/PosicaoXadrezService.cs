@@ -1,13 +1,13 @@
-﻿using tabuleiro;
+﻿using xadrez_console.Domain.Entities;
 
-namespace xadrez
+namespace xadrez_console.Application.Services
 {
-    class PosicaoXadrez
+    class PosicaoXadrezService
     {
         public char Coluna {  get; set; }
         public int Linha { get; set; }
 
-        public PosicaoXadrez(char coluna, int linha)
+        public PosicaoXadrezService(char coluna, int linha)
         {
             Coluna = coluna;
             Linha = linha;

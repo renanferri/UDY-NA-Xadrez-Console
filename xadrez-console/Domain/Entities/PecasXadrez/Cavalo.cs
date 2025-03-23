@@ -1,10 +1,11 @@
-﻿using tabuleiro;
+﻿using xadrez_console.Application.Services;
+using xadrez_console.Enums;
 
-namespace xadrez_console.xadrez
+namespace xadrez_console.Domain.Entities.PecasXadrez
 {
     class Cavalo : Peca
     {
-        public Cavalo(Tabuleiro tab, Cor cor) : base(tab, cor)
+        public Cavalo(TabuleiroService tab, CorEnum cor) : base(tab, cor)
         {
         }
 

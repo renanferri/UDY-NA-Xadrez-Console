@@ -1,4 +1,4 @@
-﻿namespace tabuleiro
+﻿namespace xadrez_console.Exceptions
 {
     class TabuleiroException : Exception
     {

@@ -1,11 +1,12 @@
-﻿using tabuleiro;
-using xadrez;
+﻿using xadrez_console.Application.Services;
+using xadrez_console.Domain.Entities;
+using xadrez_console.Enums;
 
-namespace xadrez_console
+namespace xadrez_console.Presentation.ConsoleUI
 {
     class Tela
     {
-        public static void ImprimirPartida(PartidaDeXadrez partida)
+        public static void ImprimirPartida(PartidaDeXadrezService partida)
         {
             ImprimirTabuleiro(partida.Tab);
             Console.WriteLine();
@@ -31,7 +32,7 @@ namespace xadrez_console
 
         }
 
-        public static void ImprimirTabuleiro(Tabuleiro tab)
+        public static void ImprimirTabuleiro(TabuleiroService tab)
         {
             for (int i = 0; i < tab.Linhas; i++)
             {
@@ -45,7 +46,7 @@ namespace xadrez_console
             Console.WriteLine("  a b c d e f g h");
         }        
 
-        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] posicoesPossiveis)
+        public static void ImprimirTabuleiro(TabuleiroService tab, bool[,] posicoesPossiveis)
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
@@ -72,13 +73,13 @@ namespace xadrez_console
         }
 
 
-        public static PosicaoXadrez LerPosicaoXadrez()
+        public static PosicaoXadrezService LerPosicaoXadrez()
         {
             string s = Console.ReadLine();
 
             char coluna = s[0];
             int linha = int.Parse(s[1].ToString());
-            return new PosicaoXadrez(coluna, linha);
+            return new PosicaoXadrezService(coluna, linha);
         }
 
         private static void ImprimirPeca(Peca peca)
@@ -89,7 +90,7 @@ namespace xadrez_console
             }
             else
             {
-                if (peca.Cor == Cor.Branca)
+                if (peca.Cor == CorEnum.Branca)
                 {
                     Console.Write(peca);
                 }
@@ -104,18 +105,18 @@ namespace xadrez_console
             }
         }
 
-        private static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        private static void ImprimirPecasCapturadas(PartidaDeXadrezService partida)
         {
             Console.WriteLine("Peças capturadas");
             
             Console.Write("Brancas: ");
-            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+            ImprimirConjunto(partida.PecasCapturadas(CorEnum.Branca));
             Console.WriteLine();
             
             Console.Write("Pretas: ");
             ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
-            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+            ImprimirConjunto(partida.PecasCapturadas(CorEnum.Preta));
             Console.ForegroundColor = aux;
             
             Console.WriteLine();

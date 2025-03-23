@@ -1,13 +1,13 @@
-﻿
-using tabuleiro;
+﻿using xadrez_console.Application.Services;
+using xadrez_console.Enums;
 
-namespace xadrez
+namespace xadrez_console.Domain.Entities.PecasXadrez
 {
     class Rei : Peca
     {
-        private PartidaDeXadrez _partida;
+        private PartidaDeXadrezService _partida;
 
-        public Rei(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base(tab, cor)
+        public Rei(TabuleiroService tab, CorEnum cor, PartidaDeXadrezService partida) : base(tab, cor)
         {
             _partida = partida;
         }

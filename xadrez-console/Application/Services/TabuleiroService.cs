@@ -1,13 +1,16 @@
-﻿namespace tabuleiro
+﻿using xadrez_console.Domain.Entities;
+using xadrez_console.Exceptions;
+
+namespace xadrez_console.Application.Services
 {
-    class Tabuleiro
+    class TabuleiroService
     {
         public int Linhas { get; set; }
         public int Colunas { get; set; }
         
         private Peca[,] _pecas;
 
-        public Tabuleiro(int linhas, int colunas)
+        public TabuleiroService(int linhas, int colunas)
         {
             Linhas = linhas;
             Colunas = colunas;  

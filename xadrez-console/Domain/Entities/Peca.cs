@@ -1,14 +1,17 @@
-﻿namespace tabuleiro
+﻿using xadrez_console.Application.Services;
+using xadrez_console.Enums;
+
+namespace xadrez_console.Domain.Entities
 {
     abstract class Peca
     {
-        public Tabuleiro Tab { get; protected set; }
-        public Cor Cor { get; protected set; }
+        public TabuleiroService Tab { get; protected set; }
+        public CorEnum Cor { get; protected set; }
         public Posicao Posicao { get; set; }
         public int QteMovimentos { get; protected set; }
         
 
-        public Peca(Tabuleiro tab, Cor cor)
+        public Peca(TabuleiroService tab, CorEnum cor)
         {
             Tab = tab;
             Cor = cor;

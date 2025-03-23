@@ -1,13 +1,14 @@
-﻿
-using tabuleiro;
+﻿using xadrez_console.Application.Services;
+using xadrez_console.Enums;
 
-namespace xadrez
+
+namespace xadrez_console.Domain.Entities.PecasXadrez
 {
     class Peao : Peca
     {
-        private PartidaDeXadrez _partida;
+        private PartidaDeXadrezService _partida;
 
-        public Peao(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base(tab, cor)
+        public Peao(TabuleiroService tab, CorEnum cor, PartidaDeXadrezService partida) : base(tab, cor)
         {
             _partida = partida;
         }
@@ -36,7 +37,7 @@ namespace xadrez
 
             switch (Cor)
             {
-                case Cor.Branca:
+                case CorEnum.Branca:
 
                     pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
                     if (Tab.PosicaoValida(pos) && Livre(pos))
@@ -79,7 +80,7 @@ namespace xadrez
                     }
 
                     break;
-                case Cor.Preta:
+                case CorEnum.Preta:
 
                     pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
                     if (Tab.PosicaoValida(pos) && Livre(pos))
